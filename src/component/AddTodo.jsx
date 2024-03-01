@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
 
@@ -7,9 +7,12 @@ function AddTodo() {
 
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
+
   const addTodoHandler = (e) => {
     e.preventDefault();
-    dispatch(addTodo(input));
+    // Added the todo to the store's state
+    const payload = input;
+    dispatch(addTodo(payload));
     setInput("");
   };
 

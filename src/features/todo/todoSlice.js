@@ -1,31 +1,28 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTodoReducer,
+  removeTodoReducer,
+  updateTodoReducer,
+} from "./reducers";
 
 const initialState = {
-  todos: [{ id: 1, text: "hello world " }],
+  todos: [],
 };
 
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    addTodo: (state, action) => {
-      // state take the initail value of state
-      const todo = {
-        id: nanoid(),
-        text: action.payload.text, //payload ek object h
-      };
-      state.todos.push(todo);
-    },
-    removeTodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
-    },
-    // updateTodo: (state, action) => {
-    //   state.todos = state.todos.map((todo) => {
-    //     if (action.payload.id === todo.id) todo.text = action.payload.text;// here the value is override
-    //   });
+    addTodo: addTodoReducer,
+    removeTodo: removeTodoReducer,
+    updateTodo: updateTodoReducer,
   },
 });
 
-export const { addTodo, removeTodo } = todoSlice.actions; // sending individual functionality vale from todoslice.actions yh component m kaam ayega
+// sending individual functionality vale from todoslice.actions yh component m kaam ayega
+export const { addTodo, removeTodo, updateTodo } = todoSlice.actions;
 
-export default todoSlice.reducer; //sending reducer to store taki it can know all the reducer we've created. store need to know this info
+// exporting reducer for store
+// So our store can know all the reducers we've created.
+// store need to know this info
+export default todoSlice.reducer;
